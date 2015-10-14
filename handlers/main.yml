@@ -1,0 +1,7 @@
+---
+- name: Restart statsd
+  service:
+    name: 'statsd'
+    enabled: True
+    state: 'restarted'
+

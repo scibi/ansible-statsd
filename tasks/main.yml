@@ -1,0 +1,21 @@
+---
+
+- name: Create /etc/statsd directory
+  file:
+    path: '/etc/statsd'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: Install custom service unit file and config file
+  template:
+    src: '{{ item }}.j2'
+    dest: '/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - 'etc/statsd/localConfig.js'
+    - 'etc/systemd/system/statsd.service'
+  notify: [ 'Restart statsd' ]

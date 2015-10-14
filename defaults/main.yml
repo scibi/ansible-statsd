@@ -1,0 +1,39 @@
+---
+
+
+# --------------------
+#   Basic options
+# --------------------
+
+
+# .. envvar:: statsd_version
+#
+# What version of statsd to install
+statsd_version: '0.7.2'
+
+
+# .. envvar:: statsd_enabled_backends
+#
+# Enabled backends. Supported values:
+# - graphite
+# - console
+# - repeater
+statsd_enabled_backends: ['graphite']
+
+# .. envvar:: statsd_port
+#
+# Port to listen on.
+statsd_port: 8125
+
+
+# .. envvar:: statsd_mgmt_port
+#
+# Management port to listen on.
+statsd_mgmt_port: 8126
+
+# .. envvar:: statsd_allow
+#
+# List of IP addresses or CIDR subnets which are allowed to connect to this
+# ``statsd``. If the list is empty, remote connections are denied.
+statsd_allow: [ ]
+

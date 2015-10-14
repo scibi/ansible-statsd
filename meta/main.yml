@@ -1,0 +1,54 @@
+---
+
+dependencies:
+
+  - role: debops.etc_services
+    tags: [ 'depend::etc_services', 'depend::etc_services:statsd', 'depend-of::statsd', 'type::dependency' ]
+    etc_services_dependency_list:
+      - name: 'statsd-server'
+        port: '{{ statsd_port }}'
+        comment: 'statsd'
+      - name: 'statsd-mgmt'
+        port: '{{ statsd_mgmt_port }}'
+        comment: 'statsd'
+
+  - role: debops.ferm
+    tags: [ 'depend::ferm', 'depend::ferm:statsd', 'depend-of::statsd', 'type::dependency' ]
+    ferm_input_list:
+      - type: 'dport_accept'
+        protocol: [ 'udp' ]
+        dport: [ 'statsd-server' ]
+        saddr: '{{ statsd_allow }}'
+        weight: '50'
+        filename: 'statsd_dependency_accept'
+
+  - role: debops.nodejs
+    tags: [ 'depend::nodejs', 'depend::nodejs:statsd', 'depend-of::statsd', 'type::dependency' ]
+
+  - role: debops.git_checkout
+    tags: [ 'depend::git_checkout', 'depend::git_checkout:statsd', 'depend-of::statsd', 'type::dependency' ]
+    git_checkout_name: 'statsd'
+    git_checkout_app_repo_url: 'https://github.com/etsy/statsd.git'
+    git_checkout_version: 'v{{ statsd_version }}'
+
+galaxy_info:
+  author: 'Patryk Ściborek'
+  description: 'Install, upgrade and manage statsd'
+  company: 'DebOps'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '1.7.0'
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  categories:
+  - monitoring
+

@@ -1,0 +1,22 @@
+---
+
+ansigenome_info:
+  github_url: "https://github.com/debops/ansible-statsd"
+  git_branch: "master"
+  galaxy_id: ""
+
+  travis: True
+
+  license_url: 'https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)'
+
+  authors:
+    - name:  'Patryk Ściborek'
+      url: ''
+      email: 'patryk@sciborek.com'
+      twitter: ''
+      github: 'scibi'
+
+  synopsis: |
+    This role installs [statsd](https://github.com/etsy/statsd), a deamon for
+    stats aggregation.
+
